@@ -1,0 +1,50 @@
+# Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+.project
+.classpath
+.settings/
+
+# STS
+.apt_generated
+.factorypath
+.springBeans
+.sts4-cache
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+# Compiled files
+*.class
+
+# Temp files
+*.tmp
+*.swp
+
+# Database
+*.db
+
+# Node (if frontend later)
+node_modules/
+
+# ENV-specific configs (IMPORTANT)
+application-local.properties
+application-dev.properties
+application-prod.properties
