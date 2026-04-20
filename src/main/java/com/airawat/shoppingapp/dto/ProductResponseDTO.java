@@ -1,29 +1,34 @@
 package com.airawat.shoppingapp.dto;
 
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-
 import java.math.BigDecimal;
 
-public class ProductRequestDTO{
+public class ProductResponseDTO {
 
-    @NotBlank(message = "Product name is required")
+    private Long productId;
     private String productName;
-
     private String description;
-
-    @NotBlank(message = "Category is required")
     private String category;
-
-    @NotNull(message = "Price is required")
-    @DecimalMin(value = "0.1", message = "Price must be greater than 0")
     private BigDecimal price;
-
-    @NotBlank(message = "SKU is required")
     private String sku;
 
-    public ProductRequestDTO() {
+    public ProductResponseDTO() {
+    }
+
+    public ProductResponseDTO(Long productId, String productName, String description, String category, BigDecimal price, String sku) {
+        this.productId = productId;
+        this.productName = productName;
+        this.description = description;
+        this.category = category;
+        this.price = price;
+        this.sku = sku;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 
     public String getProductName() {
