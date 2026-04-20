@@ -1,7 +1,7 @@
-package com.Springboot.ShoppingApp.controller;
+package com.airawat.shoppingapp.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.Springboot.ShoppingApp.DTO.ProductRequestDto;
+import com.airawat.shoppingapp.dto.*;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -33,8 +33,8 @@ class ProductControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    private ProductRequestDto createValidProductRequest() {
-        ProductRequestDto dto = new ProductRequestDto();
+    private ProductRequestDTO createValidProductRequest() {
+        ProductRequestDTO dto = new ProductRequestDTO();
         dto.setProductName("iPhone 15");
         dto.setDescription("Latest Apple smartphone");
         dto.setCategory("Electronics");
@@ -46,7 +46,7 @@ class ProductControllerTest {
     @Test
     @Order(1)
     void testCreateProduct_Success() throws Exception {
-        ProductRequestDto request = createValidProductRequest();
+        ProductRequestDTO request = createValidProductRequest();
 
         mockMvc.perform(post("/api/products")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -87,7 +87,7 @@ class ProductControllerTest {
     @Test
     @Order(5)
     void testUpdateProduct_Success() throws Exception {
-        ProductRequestDto request = createValidProductRequest();
+        ProductRequestDTO request = createValidProductRequest();
         request.setProductName("iPhone 15 Pro");
         request.setPrice(new BigDecimal("1199.99"));
 
@@ -102,7 +102,7 @@ class ProductControllerTest {
     @Test
     @Order(6)
     void testCreateProduct_DuplicateSku() throws Exception {
-        ProductRequestDto request = createValidProductRequest();
+        ProductRequestDTO request = createValidProductRequest();
 
         mockMvc.perform(post("/api/products")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -114,7 +114,7 @@ class ProductControllerTest {
     @Test
     @Order(7)
     void testCreateProduct_ValidationError_BlankName() throws Exception {
-        ProductRequestDto request = createValidProductRequest();
+        ProductRequestDTO request = createValidProductRequest();
         request.setProductName("");
         request.setSku("UNIQUE-SKU-001");
 
@@ -128,7 +128,7 @@ class ProductControllerTest {
     @Test
     @Order(8)
     void testCreateProduct_ValidationError_NegativePrice() throws Exception {
-        ProductRequestDto request = createValidProductRequest();
+        ProductRequestDTO request = createValidProductRequest();
         request.setPrice(new BigDecimal("-5.00"));
         request.setSku("UNIQUE-SKU-002");
 
@@ -142,7 +142,7 @@ class ProductControllerTest {
     @Order(9)
     void testDeleteProduct() throws Exception {
         // Create a product to delete
-        ProductRequestDto request = createValidProductRequest();
+        ProductRequestDTO request = createValidProductRequest();
         request.setSku("DELETE-ME-001");
 
         mockMvc.perform(post("/api/products")
