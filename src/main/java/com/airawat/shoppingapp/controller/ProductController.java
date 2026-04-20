@@ -1,11 +1,15 @@
 package com.airawat.shoppingapp.controller;
 
+import java.util.List;
+
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
 import com.airawat.shoppingapp.dto.ProductRequestDTO;
 import com.airawat.shoppingapp.dto.ProductResponseDTO;
 import com.airawat.shoppingapp.service.ProductService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/products")

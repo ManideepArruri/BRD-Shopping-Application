@@ -1,12 +1,15 @@
-package com.Springboot.ShoppingApp.serviceimpl;
+package com.airawat.shoppingapp.serviceimpl;
 
-import com.Springboot.ShoppingApp.DTO.ProductRequestDto;
-import com.Springboot.ShoppingApp.DTO.ProductResponseDto;
-import com.Springboot.ShoppingApp.entity.Product;
-import com.Springboot.ShoppingApp.exception.BadRequestException;
-import com.Springboot.ShoppingApp.exception.ResourceNotFoundException;
-import com.Springboot.ShoppingApp.repository.ProductRepository;
-import com.Springboot.ShoppingApp.service.ProductService;
+import com.airawat.shoppingapp.dto.ProductRequestDTO;
+import com.airawat.shoppingapp.dto.ProductResponseDTO;
+import com.airawat.shoppingapp.model.Product;
+import com.airawat.shoppingapp.repository.ProductRepository;
+import com.airawat.shoppingapp.service.ProductService;
+import com.airawat.shoppingapp.exception.BadRequestException;
+import com.airawat.shoppingapp.exception.ResourceNotFoundException;
+
+
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
