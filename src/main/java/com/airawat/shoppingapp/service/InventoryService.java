@@ -1,14 +1,14 @@
 package com.airawat.shoppingapp.service;
 
-import com.airawat.shoppingapp.dto.InventoryRequestDto;
-import com.airawat.shoppingapp.dto.InventoryResponseDto;
+import com.airawat.shoppingapp.dto.InventoryRequestDTO;
+import com.airawat.shoppingapp.dto.InventoryResponseDTO;
 
 import java.util.List;
 
 public interface InventoryService {
-    InventoryResponseDto createInventory(InventoryRequestDto requestDto);
-    List<InventoryResponseDto> getAllInventory();
-    InventoryResponseDto getInventoryByProductId(Long productId);
-    InventoryResponseDto updateInventory(Long productId, InventoryRequestDto requestDto);
-    List<InventoryResponseDto> getLowStockItems();
+    InventoryResponseDTO createInventory(InventoryRequestDTO requestDto);
+    List<InventoryResponseDTO> getAllInventory();
+    InventoryResponseDTO getInventoryByProductId(Long productId);
+    InventoryResponseDTO updateInventory(Long productId, InventoryRequestDTO requestDto);
+    List<InventoryResponseDTO> getLowStockItems();
 }

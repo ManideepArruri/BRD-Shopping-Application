@@ -3,7 +3,7 @@ package com.airawat.shoppingapp.dto;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
-public class InventoryRequestDto {
+public class InventoryRequestDTO {
 
     @NotNull(message = "Product id is required")
     private Long productId;
@@ -16,7 +16,7 @@ public class InventoryRequestDto {
     @Min(value = 0, message = "Reorder level cannot be negative")
     private Integer reorderLevel;
 
-    public InventoryRequestDto() {
+    public InventoryRequestDTO() {
     }
 
     public Long getProductId() {

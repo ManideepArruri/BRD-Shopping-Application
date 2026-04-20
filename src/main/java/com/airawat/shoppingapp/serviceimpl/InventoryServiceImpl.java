@@ -1,7 +1,7 @@
 package com.airawat.shoppingapp.serviceimpl;
 
-import com.airawat.shoppingapp.dto.InventoryRequestDto;
-import com.airawat.shoppingapp.dto.InventoryResponseDto;
+import com.airawat.shoppingapp.dto.InventoryRequestDTO;
+import com.airawat.shoppingapp.dto.InventoryResponseDTO;
 import com.airawat.shoppingapp.model.Inventory;
 import com.airawat.shoppingapp.model.Product;
 import com.airawat.shoppingapp.exception.BadRequestException;
@@ -30,7 +30,7 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     @Override
-    public InventoryResponseDto createInventory(InventoryRequestDto requestDto) {
+    public InventoryResponseDTO createInventory(InventoryRequestDTO requestDto) {
         logger.info("Creating inventory for product id: {}", requestDto.getProductId());
         Product product = productRepository.findById(requestDto.getProductId())
                 .orElseThrow(() -> {
@@ -54,9 +54,9 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     @Override
-    public List<InventoryResponseDto> getAllInventory() {
+    public List<InventoryResponseDTO> getAllInventory() {
         logger.info("Fetching all inventory records");
-        List<InventoryResponseDto> inventories = inventoryRepository.findAll()
+        List<InventoryResponseDTO> inventories = inventoryRepository.findAll()
                 .stream()
                 .map(this::mapToResponse)
                 .collect(Collectors.toList());
@@ -65,7 +65,7 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     @Override
-    public InventoryResponseDto getInventoryByProductId(Long productId) {
+    public InventoryResponseDTO getInventoryByProductId(Long productId) {
         logger.info("Fetching inventory for product id: {}", productId);
         Inventory inventory = inventoryRepository.findByProduct_ProductId(productId)
                 .orElseThrow(() -> {
@@ -76,7 +76,7 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     @Override
-    public InventoryResponseDto updateInventory(Long productId, InventoryRequestDto requestDto) {
+    public InventoryResponseDTO updateInventory(Long productId, InventoryRequestDTO requestDto) {
         logger.info("Updating inventory for product id: {}", productId);
         Inventory inventory = inventoryRepository.findByProduct_ProductId(productId)
                 .orElseThrow(() -> {
@@ -93,9 +93,9 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     @Override
-    public List<InventoryResponseDto> getLowStockItems() {
+    public List<InventoryResponseDTO> getLowStockItems() {
         logger.info("Fetching low stock items");
-        List<InventoryResponseDto> lowStockItems = inventoryRepository.findAll()
+        List<InventoryResponseDTO> lowStockItems = inventoryRepository.findAll()
                 .stream()
                 .filter(inv -> inv.getAvailableQuantity() <= inv.getReorderLevel())
                 .map(this::mapToResponse)
@@ -104,8 +104,8 @@ public class InventoryServiceImpl implements InventoryService {
         return lowStockItems;
     }
 
-    private InventoryResponseDto mapToResponse(Inventory inventory) {
-        return new InventoryResponseDto(
+    private InventoryResponseDTO mapToResponse(Inventory inventory) {
+        return new InventoryResponseDTO(
                 inventory.getInventoryId(),
                 inventory.getProduct().getProductId(),
                 inventory.getProduct().getProductName(),

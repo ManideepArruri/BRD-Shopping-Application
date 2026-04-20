@@ -1,6 +1,6 @@
 package com.airawat.shoppingapp.dto;
 
-public class InventoryResponseDto {
+public class InventoryResponseDTO {
 
     private Long inventoryId;
     private Long productId;
@@ -8,10 +8,10 @@ public class InventoryResponseDto {
     private Integer availableQuantity;
     private Integer reorderLevel;
 
-    public InventoryResponseDto() {
+    public InventoryResponseDTO() {
     }
 
-    public InventoryResponseDto(Long inventoryId, Long productId, String productName, Integer availableQuantity, Integer reorderLevel) {
+    public InventoryResponseDTO(Long inventoryId, Long productId, String productName, Integer availableQuantity, Integer reorderLevel) {
         this.inventoryId = inventoryId;
         this.productId = productId;
         this.productName = productName;
