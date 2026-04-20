@@ -15,19 +15,24 @@ public class Notification {
     @Column(name = "notification_type", nullable = false, length = 50)
     private String notificationType;
 
-    @Column(name = "recipient_reference", nullable = false, length = 255)
+    @Column(name = "recipient_reference", nullable = false, length = 100)
     private String recipientReference;
 
-    @Column(name = "message", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "message", nullable = false, length = 500)
     private String message;
 
-    @Column(name = "status", nullable = false, length = 30)
+    @Column(name = "status", nullable = false, length = 20)
     private String status;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
-    public Notification() {}
+    public Notification() {
+    }
 
     public Long getNotificationId() {
         return notificationId;
@@ -69,6 +74,13 @@ public class Notification {
         this.status = status;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
@@ -78,14 +90,10 @@ public class Notification {
         this.createdAt = createdAt;
     }
 
-	public Notification(String notificationType, String recipientReference, String message, String status,
-			LocalDateTime createdAt) {
-		
-		this.notificationType = notificationType;
-		this.recipientReference = recipientReference;
-		this.message = message;
-		this.status = status;
-		this.createdAt = createdAt;
-	}
-    
+    @PrePersist
+    public void prePersist() {
+        if (this.createdAt == null) {
+            this.createdAt = LocalDateTime.now();
+        }
+    }
 }
