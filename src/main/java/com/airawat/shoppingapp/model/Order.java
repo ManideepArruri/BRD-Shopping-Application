@@ -3,6 +3,7 @@ package com.airawat.shoppingapp.model;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,16 +22,41 @@ public class Order {
     @Column(name = "total_amount", nullable = false, precision = 12, scale = 2)
     private BigDecimal totalAmount;
 
-    @Column(name = "order_status", nullable = false, length = 50)
+    @Column(name = "order_status", nullable = false, length = 30)
     private String orderStatus;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<OrderItem> orderItems;
+    @Column(name = "order_date", nullable = false)
+    private LocalDateTime orderDate;
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
-    public Order() {}
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderItem> orderItems = new ArrayList<>();
+
+    public Order() {
+    }
+
+    public Order(Long orderId, User user, BigDecimal totalAmount, String orderStatus,
+                 LocalDateTime orderDate, LocalDateTime createdAt, List<OrderItem> orderItems) {
+        this.orderId = orderId;
+        this.user = user;
+        this.totalAmount = totalAmount;
+        this.orderStatus = orderStatus;
+        this.orderDate = orderDate;
+        this.createdAt = createdAt;
+        this.orderItems = orderItems;
+    }
+
+    @PrePersist
+    public void prePersist() {
+        if (this.orderDate == null) {
+            this.orderDate = LocalDateTime.now();
+        }
+        if (this.createdAt == null) {
+            this.createdAt = LocalDateTime.now();
+        }
+    }
 
     public Long getOrderId() {
         return orderId;
@@ -64,12 +90,12 @@ public class Order {
         this.orderStatus = orderStatus;
     }
 
-    public List<OrderItem> getOrderItems() {
-        return orderItems;
+    public LocalDateTime getOrderDate() {
+        return orderDate;
     }
 
-    public void setOrderItems(List<OrderItem> orderItems) {
-        this.orderItems = orderItems;
+    public void setOrderDate(LocalDateTime orderDate) {
+        this.orderDate = orderDate;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -80,13 +106,11 @@ public class Order {
         this.createdAt = createdAt;
     }
 
-	public Order(User user, BigDecimal totalAmount, String orderStatus, List<OrderItem> orderItems,
-			LocalDateTime createdAt) {
-		this.user = user;
-		this.totalAmount = totalAmount;
-		this.orderStatus = orderStatus;
-		this.orderItems = orderItems;
-		this.createdAt = createdAt;
-	}
-    
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
+    }
 }
