@@ -88,6 +88,12 @@ public class Product {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
+    @PrePersist
+    public void prePersist() {
+        if (this.createdAt == null) {
+            this.createdAt = LocalDateTime.now();
+        }
+    }
 
 	public Product(String productName, String description, String category, BigDecimal price, String sku,
 			LocalDateTime createdAt) {
