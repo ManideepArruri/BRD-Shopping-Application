@@ -3,8 +3,8 @@ package com.airawat.shoppingapp.controller;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
-import com.airawat.shoppingapp.dto.ProductRequestDto;
-import com.airawat.shoppingapp.dto.ProductResponseDto;
+import com.airawat.shoppingapp.dto.ProductRequestDTO;
+import com.airawat.shoppingapp.dto.ProductResponseDTO;
 import com.airawat.shoppingapp.service.ProductService;
 
 @RestController
@@ -18,23 +18,23 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductResponseDto> createProduct(@Valid @RequestBody ProductRequestDto requestDto) {
+    public ResponseEntity<ProductResponseDTO> createProduct(@Valid @RequestBody ProductRequestDTO requestDto) {
         return new ResponseEntity<>(productService.createProduct(requestDto), HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<List<ProductResponseDto>> getAllProducts() {
+    public ResponseEntity<List<ProductResponseDTO>> getAllProducts() {
         return ResponseEntity.ok(productService.getAllProducts());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductResponseDto> getProductById(@PathVariable Long id) {
+    public ResponseEntity<ProductResponseDTO> getProductById(@PathVariable Long id) {
         return ResponseEntity.ok(productService.getProductById(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProductResponseDto> updateProduct(@PathVariable Long id,
-                                                            @Valid @RequestBody ProductRequestDto requestDto) {
+    public ResponseEntity<ProductResponseDTO> updateProduct(@PathVariable Long id,
+                                                            @Valid @RequestBody ProductRequestDTO requestDto) {
         return ResponseEntity.ok(productService.updateProduct(id, requestDto));
     }
 
