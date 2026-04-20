@@ -1,29 +1,32 @@
 package com.airawat.shoppingapp.dto;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+public class UserResponseDTO {
 
-public class UserRequestDTO {
-
-    @NotBlank(message = "First name is required")
+    private Long userId;
     private String firstName;
-
-    @NotBlank(message = "Last name is required")
     private String lastName;
-
-    @Email(message = "Invalid email format")
-    @NotBlank(message = "Email is required")
     private String email;
-
-    @NotBlank(message = "Phone is required")
-    @Size(min = 10, max = 15, message = "Phone must be between 10 and 15 characters")
     private String phone;
-
-    @NotBlank(message = "Role is required")
     private String role;
 
-    public UserRequestDTO() {
+    public UserResponseDTO() {
+    }
+
+    public UserResponseDTO(Long userId, String firstName, String lastName, String email, String phone, String role) {
+        this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.role = role;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getFirstName() {

@@ -87,6 +87,12 @@ public class User {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
+    @PrePersist
+    public void prePersist() {
+        if (this.createdAt == null) {
+            this.createdAt = LocalDateTime.now();
+        }
+    }
 
 	public User(String firstName, String lastName, String email, String phone, String role, LocalDateTime createdAt) {
 		this.firstName = firstName;
