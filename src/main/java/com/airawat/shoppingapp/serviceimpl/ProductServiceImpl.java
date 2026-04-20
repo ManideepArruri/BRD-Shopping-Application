@@ -26,7 +26,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductResponseDto createProduct(ProductRequestDto requestDto) {
+    public ProductResponseDTO createProduct(ProductRequestDTO requestDto) {
         logger.info("Creating product with SKU: {}", requestDto.getSku());
         if (productRepository.existsBySku(requestDto.getSku())) {
             logger.warn("Duplicate SKU detected: {}", requestDto.getSku());
@@ -46,9 +46,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductResponseDto> getAllProducts() {
+    public List<ProductResponseDTO> getAllProducts() {
         logger.info("Fetching all products");
-        List<ProductResponseDto> products = productRepository.findAll()
+        List<ProductResponseDTO> products = productRepository.findAll()
                 .stream()
                 .map(this::mapToResponse)
                 .collect(Collectors.toList());
@@ -57,7 +57,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductResponseDto getProductById(Long id) {
+    public ProductResponseDTO getProductById(Long id) {
         logger.info("Fetching product with id: {}", id);
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> {
@@ -68,7 +68,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductResponseDto updateProduct(Long id, ProductRequestDto requestDto) {
+    public ProductResponseDTO updateProduct(Long id, ProductRequestDTO requestDto) {
         logger.info("Updating product with id: {}", id);
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> {
@@ -99,8 +99,8 @@ public class ProductServiceImpl implements ProductService {
         logger.info("Product deleted successfully with id: {}", id);
     }
 
-    private ProductResponseDto mapToResponse(Product product) {
-        return new ProductResponseDto(
+    private ProductResponseDTO mapToResponse(Product product) {
+        return new ProductResponseDTO(
                 product.getProductId(),
                 product.getProductName(),
                 product.getDescription(),
